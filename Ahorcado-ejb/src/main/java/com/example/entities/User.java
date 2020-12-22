@@ -5,12 +5,11 @@
  */
 package com.example.entities;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Version;
+
 
 /**
  *
@@ -35,9 +34,6 @@ public class User {
 
     private int ranking;
 
-    //use version or not???
-    @Version
-    private int version;
 
     public int getRanking() {
         return ranking;

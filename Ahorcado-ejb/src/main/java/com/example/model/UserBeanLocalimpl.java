@@ -217,7 +217,29 @@ public class UserBeanLocalimpl implements UserBeanLocal {
 
     }
 
+    @Override
+    public String getUserLogged() {
+      return ctx.getCallerPrincipal().getName();
+    }
+
+    @Override
+    public String getGroupLogged() {
+          if(isUser()){
+          return "user";
+          }else if(isAdmin()){
+          return "admin";
+          }
+          return null;
+ 
+    }
     
+    public boolean isAdmin(){
+    return ctx.isCallerInRole("admin");
+    }
+    
+    public boolean isUser(){
+    return ctx.isCallerInRole("user");
+    }
 
  
 
