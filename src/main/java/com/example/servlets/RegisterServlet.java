@@ -32,7 +32,7 @@ public class RegisterServlet extends HttpServlet {
     
     protected void processRequest(HttpServletRequest request,HttpServletResponse response)
             throws ServletException,IOException{
-    /*todo
+    /*
     Consigue los datos del formulario
     para crear un nuevo usuario
     */
@@ -52,12 +52,11 @@ public class RegisterServlet extends HttpServlet {
     dispatchToErrorPage(request,response);
    }else{
        
-  //   check that user does already exist
+  //Se comprueba que el usuario no sea uno existente
   for(User u:lst) {
   
       //Si el usuario ya existe
   if(u.getUser().equals(user)){
-          //search method with binary search???
     request.setAttribute("UserExists", true);
     dispatchToErrorPage(request,response);
   }
@@ -74,7 +73,7 @@ public class RegisterServlet extends HttpServlet {
     
     
     
-    /*creacion de usuario y persistencia*/
+    /*Creacion de usuario y persistencia*/
     User nuser = new User();
     nuser.setUser(user);
     nuser.setPass(password);

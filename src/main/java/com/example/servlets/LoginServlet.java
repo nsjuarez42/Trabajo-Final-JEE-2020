@@ -32,10 +32,6 @@ public class LoginServlet extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        /*Todo:
-        revisar que hacer con security forms
-        User validation in database
-        dispatch to main */
         //Se consiguen los parametros del formulario
         String user, pass;
         user = request.getParameter("username");
@@ -44,10 +40,6 @@ public class LoginServlet extends HttpServlet {
 
         List<User> list = userBean.getUsers();
 
-        /*TODO 
-    see if theres better way to search and validate user
-    maybe do binary search
-         */
         for (User u : list) {
             if (u.getUser().equals(user) && u.getPass().equals(pass)) {
                 userBean.updateRanking();

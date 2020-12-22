@@ -4,6 +4,7 @@
     Author     : Nicolas
 --%>
 
+<%@page import="com.example.servlets.GetUserbeanServlet"%>
 <%@page import="com.example.servlets.GetBeansServlet"%>
 <%@page import="com.example.model.UserBeanLocal"%>
 <%@page import="java.util.List"%>
@@ -149,114 +150,19 @@
         }
 
     </style> 
-    <script>
-        const canvas = document.getElementbyId('hangman');
-        const context = canvas.getContext("2d");
-        var mistakes = document.getElementbyId('mistakes').textContent;
-
-        clearCanvas => {
-            context.clearRect(0, 0, canvas.width, canvas.height);
-        }
-
-
-        draw = (part) => {
-            context.strokeStyle = 'black';
-            context.fillStyle = 'black';
-            context.lineWidth = 3;
-            switch (part) {
-                case 'gallows':
-                    context.lineWidth = 10;
-                    context.beginPath();
-                    context.moveTo(190, 280);
-                    context.lineTo(5, 280);
-                    context.moveTo(25, 280);
-                    context.lineTo(30, 20);
-                    context.lineTo(60, 20);
-                    context.lineTo(60, 25);
-                    context.stroke();
-                    break;
-                case 'head':
-                    context.lineWidth = 7;
-                    context.beginPath();
-                    context.arc(80, 20, 10, 0, Math.PI * 2, true);
-                    context.closePath();
-                    context.stroke();
-                case  'torso':
-                    context.beginPath();
-                    context.moveTo(80, 30);
-                    context.lineTo(80, 80);
-                    context.stroke();
-                    break;
-                case 'leftarm':
-                    context.beginPath();
-                    context.moveTo(80, 40);
-                    context.lineTo(60, 60);
-                    context.stroke();
-                case 'rightarm':
-                    context.beginPath();
-                    context.moveTo(80, 40);
-                    context.lineTo(100, 60);
-                    context.stroke();
-
-                case 'leftleg':
-                    context.beginPath();
-                    context.moveTo(80, 80);
-                    context.lineTo(60, 120);
-                    context.stroke();
-                case 'rightleg':
-                    context.beginPath();
-                    context.moveTo(80, 80);
-                    context.moveTo(100, 120);
-                    context.stroke();
-
-            }
-
-
-
-        }
-        switch (mistakes.) {
-            case '0':
-                clearCanvas();
-            case '1':
-                draw('gallows');
-            case '2':
-                draw('gallows');
-                draw('head');
-            case '3':
-                draw('gallows');
-                draw('head');
-                draw('torso');
-            case '4':
-                draw('gallows');
-                draw('head');
-                draw('torso');
-                draw('rightarm');
-            case '5':
-                draw('gallows');
-                draw('head');
-                draw('torso');
-                draw('rightarm');
-                draw('leftarm');
-            case '6':
-                draw('gallows');
-                draw('head');
-                draw('torso');
-                draw('rightarm');
-                draw('leftarm');
-                draw('leftleg');
-            case '7':
-                draw('gallows');
-                draw('head');
-                draw('torso');
-                draw('rightarm');
-                draw('leftarm');
-                draw('leftleg');
-                draw('rightleg');
-
-        }
-    </script>
-
-    <body> <div id="all">
+    
+    
+    <body> 
+        <%
+        UserBeanLocal bean =((GetUserbeanServlet)getServletContext().getAttribute("getBeans")).getBean();
+        String user = bean.getUserLogged();
+        String group = bean.getGroupLogged();
+        pageContext.setAttribute("user", user);
+        pageContext.setAttribute("group", group);
+        
+        %>
+        
+        <div id="all">
       
             <!--Barra de navegacion lateral con los datos del usuario-->
             <nav class="sidenav">
@@ -273,10 +179,10 @@
                 <form action="/logout" method="POST">
                     <button type="submit" class="navbutton">Logout</button><br>
                 </form>
-
-
-                <!--Si el usuario es admin puede administrar palabras-->
-                <c:if test="${group eq admin}">
+                <!--Si el usuario es admin puede administrar palabras
+                como comprobar usuario admin
+                -->
+                <c:if test="${pageContext.group eq admin}">
                     <form action="/maintoadmin" method="GET">
                         <input type="submit" value="Administrar palabras"  class="navbutton"><br>
                     </form>
@@ -292,30 +198,24 @@
 
                 <div class="playbutton">
                     <form action="/mainWord">
-
                         <%
                             List<Character> guess = (List<Character>) request.getAttribute("guess");
                         %>
                         <form action="/main" method="GET">
                             <input type="submit" value="play game(solo)" id="play-button" class="button"><br>
                         </form>
-                </div>
-                        
+                </div>       
                 <div class="input">
                     <input type="text" name="guess" id="letter" class="textin" value=<%=guess.toString()%>>
-               </div>
-                    
+               </div>   
                     <div class="submit">        
                         <input type="submit" value="Aceptar" class="button">
                     </div>        
-
                     </form>
-
                     <div class="mistakes">
                         <p class="mistakes">Errores</p>
                         <p id="mistakes" class="mistakes">7</p>
                     </div>
-
                 </div>
             </div>
 

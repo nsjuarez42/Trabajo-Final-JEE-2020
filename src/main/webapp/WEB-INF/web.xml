@@ -9,6 +9,14 @@
         <servlet-class>com.example.webservice.rankingService</servlet-class>
         <load-on-startup>1</load-on-startup>
     </servlet>
+    <servlet>
+        <servlet-name>GetUserbeanServlet</servlet-name>
+        <servlet-class>com.example.servlets.GetUserbeanServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>GetUserBeanServlet</servlet-name>
+        <url-pattern>/getBeans</url-pattern>
+    </servlet-mapping>
     <servlet-mapping>
         <servlet-name>rankingService</servlet-name>
         <url-pattern>/rankingService</url-pattern>
@@ -84,6 +92,10 @@
     <servlet-mapping>
         <servlet-name>LogoutServlet</servlet-name>
         <url-pattern>/logout</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GetUserbeanServlet</servlet-name>
+        <url-pattern>/GetUserbeanServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
