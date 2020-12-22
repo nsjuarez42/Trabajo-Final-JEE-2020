@@ -149,112 +149,13 @@
         }
 
     </style> 
-    <script>
-        const canvas = document.getElementbyId('hangman');
-        const context = canvas.getContext("2d");
-        var mistakes = document.getElementbyId('mistakes').textContent;
-
-        clearCanvas => {
-            context.clearRect(0, 0, canvas.width, canvas.height);
-        }
-
-
-        draw = (part) => {
-            context.strokeStyle = 'black';
-            context.fillStyle = 'black';
-            context.lineWidth = 3;
-            switch (part) {
-                case 'gallows':
-                    context.lineWidth = 10;
-                    context.beginPath();
-                    context.moveTo(190, 280);
-                    context.lineTo(5, 280);
-                    context.moveTo(25, 280);
-                    context.lineTo(30, 20);
-                    context.lineTo(60, 20);
-                    context.lineTo(60, 25);
-                    context.stroke();
-                    break;
-                case 'head':
-                    context.lineWidth = 7;
-                    context.beginPath();
-                    context.arc(80, 20, 10, 0, Math.PI * 2, true);
-                    context.closePath();
-                    context.stroke();
-                case  'torso':
-                    context.beginPath();
-                    context.moveTo(80, 30);
-                    context.lineTo(80, 80);
-                    context.stroke();
-                    break;
-                case 'leftarm':
-                    context.beginPath();
-                    context.moveTo(80, 40);
-                    context.lineTo(60, 60);
-                    context.stroke();
-                case 'rightarm':
-                    context.beginPath();
-                    context.moveTo(80, 40);
-                    context.lineTo(100, 60);
-                    context.stroke();
-
-                case 'leftleg':
-                    context.beginPath();
-                    context.moveTo(80, 80);
-                    context.lineTo(60, 120);
-                    context.stroke();
-                case 'rightleg':
-                    context.beginPath();
-                    context.moveTo(80, 80);
-                    context.moveTo(100, 120);
-                    context.stroke();
-
-            }
-
-
-
-        }
-        switch (mistakes.) {
-            case '0':
-                clearCanvas();
-            case '1':
-                draw('gallows');
-            case '2':
-                draw('gallows');
-                draw('head');
-            case '3':
-                draw('gallows');
-                draw('head');
-                draw('torso');
-            case '4':
-                draw('gallows');
-                draw('head');
-                draw('torso');
-                draw('rightarm');
-            case '5':
-                draw('gallows');
-                draw('head');
-                draw('torso');
-                draw('rightarm');
-                draw('leftarm');
-            case '6':
-                draw('gallows');
-                draw('head');
-                draw('torso');
-                draw('rightarm');
-                draw('leftarm');
-                draw('leftleg');
-            case '7':
-                draw('gallows');
-                draw('head');
-                draw('torso');
-                draw('rightarm');
-                draw('leftarm');
-                draw('leftleg');
-                draw('rightleg');
-
-        }
-    </script>
+   <%
+      UserBeanLocal bean =((GetBeansServlet)getServletContext().getAttribute("getBeans")).getBean();
+      String user = bean.getUserLogged();
+      String group = bean.getGroupLogged();
+      pageContext.setAttribute("group", group);
+      pageContext.setAttribute("user", user);
+   %>
 
     <body> <div id="all">
       

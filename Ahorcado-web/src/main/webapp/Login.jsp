@@ -54,9 +54,6 @@
     </style> 
     <body>
 
-
-
-
         <h1 class="title">Login</h1>
         <!--Formulario de Login con directiva de seguridad-->
         <form action="j_security_check" method="POST">
