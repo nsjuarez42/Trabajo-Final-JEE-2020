@@ -21,6 +21,8 @@ public interface UserBeanLocal extends Serializable {
    public List<User> getUsers();
    public void updateUser(User user,User newUser);
    public List<User> updateRanking();
+   public String getUserLogged();
+   public String getGroupLogged();
 
 
 }
